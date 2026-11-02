@@ -22,8 +22,12 @@ a{color:inherit}
 /* Hero */
 .hero{padding:96px 0 72px;border-bottom:1px solid var(--line)}
 .hero p.hi{color:var(--muted);margin-bottom:8px}
+.hero .name-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .hero h1{font-family:"Black Han Sans","Noto Sans KR",sans-serif;font-weight:400;font-size:clamp(72px,18vw,176px);line-height:1;letter-spacing:-.02em}
 .hero h1 .a{color:var(--ink)}
+.emblem{width:clamp(96px,22vw,150px);height:clamp(96px,22vw,150px);flex:none;animation:popIn .9s .15s ease both}
+.emblem .spin{transform-origin:100px 100px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 .hero .tag{margin-top:28px;font-size:20px;max-width:34em}
 .hero .tag b{background:linear-gradient(transparent 60%,var(--biz) 60%);font-weight:600}
 .hero .tag i{font-style:normal;font-weight:600;background:linear-gradient(transparent 60%,#b9c3ff 60%)}
@@ -102,7 +106,7 @@ footer a{font-weight:600;color:var(--ink)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,.hero p.hi,.hero h1,.hero .tag,.hero nav,.hero .univ{animation:none!important;transition:none!important}
+  *,.hero p.hi,.hero h1,.hero .tag,.hero nav,.hero .univ,.emblem,.emblem .spin{animation:none!important;transition:none!important}
   .reveal{opacity:1!important;transform:none!important}
 }
 </style>
@@ -112,7 +116,32 @@ footer a{font-weight:600;color:var(--ink)}
 <header class="hero">
   <div class="wrap">
     <p class="hi">안녕하세요, 저는</p>
-    <h1><span class="a">송민준</span></h1>
+    <div class="name-row">
+      <h1><span class="a">송민준</span></h1>
+      <svg class="emblem" viewBox="0 0 200 200" role="img" aria-label="국민대학교 엠블럼" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="arc-top" d="M30 100 A70 70 0 0 1 170 100" fill="none"/>
+          <path id="arc-bottom" d="M34 100 A66 66 0 0 0 166 100" fill="none"/>
+        </defs>
+        <circle cx="100" cy="100" r="92" fill="#fff" stroke="#0A2A66" stroke-width="2"/>
+        <g class="spin">
+          <circle cx="100" cy="100" r="78" fill="none" stroke="#0A2A66" stroke-width="2.5"/>
+          <text font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#0A2A66">
+            <textPath href="#arc-top" startOffset="50%" text-anchor="middle">KOOKMIN UNIVERSITY SINCE 1946</textPath>
+          </text>
+          <text font-family="'Black Han Sans','Noto Sans KR',sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#0A2A66">
+            <textPath href="#arc-bottom" startOffset="50%" text-anchor="middle">국 민 대 학 교</textPath>
+          </text>
+        </g>
+        <!-- 색동 띠 -->
+        <path d="M46 118 Q100 96 154 118 L154 128 Q100 108 46 128 Z" fill="#E60012"/>
+        <path d="M46 128 Q100 108 154 128 L154 137 Q100 118 46 137 Z" fill="#F2A900"/>
+        <path d="M46 137 Q100 118 154 137 L154 146 Q100 128 46 146 Z" fill="#009A44"/>
+        <path d="M46 146 Q100 128 154 146 L154 154 Q100 137 46 154 Z" fill="#0A2A66"/>
+        <!-- KMU 워드마크 -->
+        <text x="100" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="800" fill="#0A2A66" letter-spacing="1">KMU</text>
+      </svg>
+    </div>
     <p class="tag">경영의 문제를 <b>정보기술</b>로 풀어내는 <i>경영정보학부</i> 학생입니다.</p>
     <nav aria-label="바로가기">
       <a href="#about">자기소개</a>
