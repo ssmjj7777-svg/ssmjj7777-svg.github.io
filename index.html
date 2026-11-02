@@ -68,6 +68,30 @@ footer{padding:56px 0 80px}
 footer p{color:var(--muted)}
 footer a{font-weight:600;color:var(--ink)}
 
+/* University badge */
+.univ{display:inline-flex;align-items:center;gap:14px;margin-top:20px;padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:var(--white);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+.univ:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(27,36,51,.12)}
+.univ .logo{width:44px;height:44px;flex:none}
+.univ .txt b{display:block;font-weight:600;font-size:16px;line-height:1.2}
+.univ .txt span{color:var(--muted);font-size:13.5px}
+
+/* Entrance / scroll animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{0%{opacity:0;transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
+.hero p.hi{animation:fadeUp .7s ease both}
+.hero h1{animation:fadeUp .8s .1s ease both}
+.hero .tag{animation:fadeUp .8s .25s ease both}
+.hero nav{animation:fadeUp .8s .4s ease both}
+.hero .univ{animation:popIn .8s .55s ease both}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+.features article{transition:transform .25s ease,background .25s ease}
+.features article:hover{transform:translateY(-4px);background:#fff}
+.chips span{transition:transform .2s ease,background .2s ease,color .2s ease}
+.chips span:hover{transform:translateY(-2px);background:var(--ink);color:var(--white)}
+.career li{transition:transform .25s ease,border-color .25s ease}
+.career li:hover{transform:translateX(6px);border-color:var(--info)}
+
 @media (max-width:640px){
   body{font-size:16px}
   .hero{padding:64px 0 48px}
@@ -76,7 +100,11 @@ footer a{font-weight:600;color:var(--ink)}
   dl.facts{grid-template-columns:1fr;gap:2px}
   dd{margin-bottom:12px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,.hero p.hi,.hero h1,.hero .tag,.hero nav,.hero .univ{animation:none!important;transition:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
@@ -92,11 +120,23 @@ footer a{font-weight:600;color:var(--ink)}
       <a href="#career">진로</a>
       <a href="#contact">연락처</a>
     </nav>
+    <a class="univ" href="https://www.kookmin.ac.kr" target="_blank" rel="noopener" aria-label="국민대학교 경영정보학부">
+      <svg class="logo" viewBox="0 0 64 64" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="60" height="60" rx="12" fill="#CC0000"/>
+        <path d="M14 46V18h6l10 14V18h6v28h-6L20 32v14z" fill="#fff"/>
+        <circle cx="46" cy="24" r="6" fill="#fff"/>
+        <rect x="40" y="34" width="12" height="12" rx="2" fill="#fff"/>
+      </svg>
+      <span class="txt">
+        <b>국민대학교</b>
+        <span>경영정보학부 · Kookmin University</span>
+      </span>
+    </a>
   </div>
 </header>
 
 <main>
-  <section id="about">
+  <section id="about" class="reveal">
     <div class="wrap">
       <h2>자기소개</h2>
       <div class="lead">
@@ -112,7 +152,7 @@ footer a{font-weight:600;color:var(--ink)}
     </div>
   </section>
 
-  <section id="major">
+  <section id="major" class="reveal">
     <div class="wrap">
       <h2>경영정보학부는 어떤 학부인가요?</h2>
       <div class="merge">
@@ -149,7 +189,7 @@ footer a{font-weight:600;color:var(--ink)}
     </div>
   </section>
 
-  <section id="career" class="career">
+  <section id="career" class="career reveal">
     <div class="wrap">
       <h2>졸업 후 진로</h2>
       <ul>
@@ -162,12 +202,32 @@ footer a{font-weight:600;color:var(--ink)}
   </section>
 </main>
 
-<footer id="contact">
+<footer id="contact" class="reveal">
   <div class="wrap">
     <h2>연락처</h2>
     <p>이메일: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
   </div>
 </footer>
+
+<script>
+  // 스크롤 시 섹션이 부드럽게 나타나는 애니메이션
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function(el){ el.classList.add('show'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el){ io.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
