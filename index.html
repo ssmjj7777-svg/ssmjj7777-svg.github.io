@@ -72,25 +72,24 @@ footer{padding:56px 0 80px}
 footer p{color:var(--muted)}
 footer a{font-weight:600;color:var(--ink)}
 
-/* Style vote */
-.vote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
-.vote-card{position:relative;text-align:left;cursor:pointer;border:1px solid var(--ink);background:var(--white);padding:22px 20px;border-radius:14px;font:inherit;color:inherit;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.vote-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(27,36,51,.12)}
-.vote-card:disabled{cursor:default;opacity:.95}
-.vote-card .emoji{font-size:30px;line-height:1}
-.vote-card h3{font-size:19px;font-weight:600;margin:10px 0 4px}
-.vote-card p{color:var(--muted);font-size:14.5px;line-height:1.5}
-.vote-card .bar{margin-top:14px;height:10px;border-radius:999px;background:var(--line);overflow:hidden}
-.vote-card .bar span{display:block;height:100%;width:0;border-radius:999px;transition:width .8s cubic-bezier(.22,1,.36,1)}
-.vote-card[data-style="vintage_rockstar"] .bar span{background:var(--info)}
-.vote-card[data-style="minimal"] .bar span{background:var(--ink)}
-.vote-card[data-style="street"] .bar span{background:var(--biz)}
-.vote-card .count{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;font-size:14px;color:var(--muted)}
-.vote-card .count b{font-size:20px;color:var(--ink);font-weight:700}
-.vote-card.chosen{border-color:var(--info);box-shadow:0 0 0 3px rgba(47,75,255,.18)}
-.vote-status{margin-top:16px;font-size:14.5px;color:var(--muted);min-height:1.2em}
-.vote-status.err{color:#c0392b}
-.vote-total{margin-top:6px;font-size:14px;color:var(--muted)}
+/* Guestbook */
+.gb-form{display:grid;gap:12px;margin-top:8px;max-width:620px}
+.gb-form .row{display:grid;grid-template-columns:200px 1fr;gap:12px}
+.gb-form input,.gb-form textarea{font:inherit;color:inherit;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s ease,box-shadow .2s ease}
+.gb-form input:focus,.gb-form textarea:focus{outline:none;border-color:var(--info);box-shadow:0 0 0 3px rgba(47,75,255,.15)}
+.gb-form textarea{min-height:92px;resize:vertical}
+.gb-form button{justify-self:start;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--white);padding:12px 24px;border-radius:999px;transition:transform .2s ease,opacity .2s ease}
+.gb-form button:hover{transform:translateY(-2px)}
+.gb-form button:disabled{opacity:.55;cursor:default;transform:none}
+.gb-status{margin-top:12px;font-size:14.5px;color:var(--muted);min-height:1.2em}
+.gb-status.err{color:#c0392b}
+.gb-count{margin-top:28px;font-size:14px;color:var(--muted)}
+.gb-list{list-style:none;display:grid;gap:14px;margin-top:12px}
+.gb-item{border:1px solid var(--line);background:var(--white);border-radius:14px;padding:16px 18px;animation:fadeUp .5s ease both}
+.gb-item .head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
+.gb-item .who{font-weight:600}
+.gb-item .when{color:var(--muted);font-size:13px;white-space:nowrap}
+.gb-item .msg{color:var(--ink);white-space:pre-wrap;word-break:break-word}
 
 /* University badge */
 .univ{display:inline-flex;align-items:center;gap:14px;margin-top:20px;padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:var(--white);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
@@ -120,7 +119,7 @@ footer a{font-weight:600;color:var(--ink)}
   body{font-size:16px}
   .hero{padding:64px 0 48px}
   .merge,.features{grid-template-columns:1fr}
-  .vote-grid{grid-template-columns:1fr}
+  .gb-form .row{grid-template-columns:1fr}
   .features article,.features article:nth-child(even){padding:20px 0;border-left:0}
   dl.facts{grid-template-columns:1fr;gap:2px}
   dd{margin-bottom:12px}
@@ -168,7 +167,7 @@ footer a{font-weight:600;color:var(--ink)}
       <a href="#about">자기소개</a>
       <a href="#major">경영정보학부 특징</a>
       <a href="#career">진로</a>
-      <a href="#vote">스타일 투표</a>
+      <a href="#guestbook">방명록</a>
       <a href="#contact">연락처</a>
     </nav>
     <a class="univ" href="https://www.kookmin.ac.kr" target="_blank" rel="noopener" aria-label="국민대학교 경영정보학부">
@@ -252,35 +251,23 @@ footer a{font-weight:600;color:var(--ink)}
     </div>
   </section>
 
-  <section id="vote" class="reveal">
+  <section id="guestbook" class="reveal">
     <div class="wrap">
-      <h2>당신의 패션 스타일은?</h2>
-      <p class="lead" style="margin-bottom:24px;color:var(--muted)">마음에 드는 스타일에 투표해 주세요. 결과는 실시간으로 함께 집계됩니다.</p>
-      <div class="vote-grid">
-        <button class="vote-card" type="button" data-style="vintage_rockstar">
-          <div class="emoji">🎸</div>
-          <h3>빈티지 락스타</h3>
-          <p>가죽, 데님, 빈티지 밴드 티. 거칠고 자유로운 무드.</p>
-          <div class="bar"><span></span></div>
-          <div class="count"><span>득표</span><b class="num">0</b></div>
-        </button>
-        <button class="vote-card" type="button" data-style="minimal">
-          <div class="emoji">🤍</div>
-          <h3>미니멀</h3>
-          <p>군더더기 없는 색과 선. 단정하고 깔끔한 무드.</p>
-          <div class="bar"><span></span></div>
-          <div class="count"><span>득표</span><b class="num">0</b></div>
-        </button>
-        <button class="vote-card" type="button" data-style="street">
-          <div class="emoji">🧢</div>
-          <h3>스트릿</h3>
-          <p>오버핏, 스니커즈, 그래픽. 편하고 개성 있는 무드.</p>
-          <div class="bar"><span></span></div>
-          <div class="count"><span>득표</span><b class="num">0</b></div>
-        </button>
-      </div>
-      <p id="voteStatus" class="vote-status">불러오는 중...</p>
-      <p id="voteTotal" class="vote-total"></p>
+      <h2>방명록</h2>
+      <p class="lead" style="margin-bottom:24px;color:var(--muted)">들러 주셔서 고마워요. 한마디 남겨 주시면 아래에 함께 표시됩니다.</p>
+
+      <form id="gbForm" class="gb-form" autocomplete="off">
+        <div class="row">
+          <input id="gbName" type="text" name="name" maxlength="40" placeholder="이름 (또는 닉네임)" required>
+          <input type="text" style="display:none" tabindex="-1" aria-hidden="true" name="website">
+        </div>
+        <textarea id="gbMessage" name="message" maxlength="500" placeholder="남기고 싶은 말을 적어 주세요." required></textarea>
+        <button id="gbSubmit" type="submit">방명록 남기기</button>
+      </form>
+      <p id="gbStatus" class="gb-status">불러오는 중...</p>
+
+      <p id="gbCount" class="gb-count"></p>
+      <ul id="gbList" class="gb-list"></ul>
     </div>
   </section>
 </main>
@@ -312,7 +299,7 @@ footer a{font-weight:600;color:var(--ink)}
   })();
 </script>
 
-<!-- 패션 스타일 투표: Supabase 연동 -->
+<!-- 방명록: Supabase 연동 -->
 <script type="module">
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -323,78 +310,98 @@ footer a{font-weight:600;color:var(--ink)}
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const STYLES = ['vintage_rockstar', 'minimal', 'street'];
-  const statusEl = document.getElementById('voteStatus');
-  const totalEl  = document.getElementById('voteTotal');
-  const cards = {};
-  document.querySelectorAll('.vote-card').forEach(function(btn){
-    cards[btn.dataset.style] = btn;
-  });
+  const form      = document.getElementById('gbForm');
+  const nameEl    = document.getElementById('gbName');
+  const msgEl     = document.getElementById('gbMessage');
+  const submitBtn = document.getElementById('gbSubmit');
+  const statusEl  = document.getElementById('gbStatus');
+  const countEl   = document.getElementById('gbCount');
+  const listEl    = document.getElementById('gbList');
 
   function setStatus(msg, isErr){
     statusEl.textContent = msg;
     statusEl.classList.toggle('err', !!isErr);
   }
 
-  // 결과 조회 후 화면 갱신 (테이블을 직접 읽어 클라이언트에서 집계)
-  async function loadResults(){
+  function esc(s){
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function fmt(ts){
+    try {
+      const d = new Date(ts);
+      return d.toLocaleString('ko-KR', { dateStyle:'medium', timeStyle:'short' });
+    } catch(e){ return ''; }
+  }
+
+  // 방명록 목록 조회
+  async function loadEntries(){
     const { data, error } = await supabase
-      .from('style_votes')
-      .select('style');
+      .from('guestbook')
+      .select('name, message, created_at')
+      .order('created_at', { ascending: false })
+      .limit(200);
     if (error){
       console.error(error);
-      setStatus('결과를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true);
+      setStatus('방명록을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true);
       return;
     }
-    const counts = { vintage_rockstar: 0, minimal: 0, street: 0 };
-    (data || []).forEach(function(row){
-      if (counts[row.style] !== undefined) counts[row.style] += 1;
-    });
-    const total = STYLES.reduce(function(s, k){ return s + counts[k]; }, 0);
-
-    STYLES.forEach(function(k){
-      const card = cards[k];
-      if (!card) return;
-      const pct = total > 0 ? Math.round((counts[k] / total) * 100) : 0;
-      card.querySelector('.num').textContent = counts[k];
-      card.querySelector('.bar span').style.width = pct + '%';
-    });
-    totalEl.textContent = total > 0
-      ? ('지금까지 총 ' + total + '표가 모였어요.')
-      : '아직 투표가 없어요. 첫 투표의 주인공이 되어 주세요!';
-    if (!statusEl.classList.contains('err')) setStatus('마음에 드는 스타일을 눌러 투표하세요.');
+    const rows = data || [];
+    countEl.textContent = rows.length > 0
+      ? ('지금까지 ' + rows.length + '개의 방명록이 남겨졌어요.')
+      : '아직 방명록이 없어요. 첫 글을 남겨 주세요!';
+    listEl.innerHTML = rows.map(function(r){
+      return '<li class="gb-item">' +
+        '<div class="head"><span class="who">' + esc(r.name) + '</span>' +
+        '<span class="when">' + fmt(r.created_at) + '</span></div>' +
+        '<div class="msg">' + esc(r.message) + '</div></li>';
+    }).join('');
+    if (!statusEl.classList.contains('err')) setStatus('');
   }
 
-  // 투표 저장
-  async function vote(style){
-    Object.values(cards).forEach(function(b){ b.disabled = true; b.classList.remove('chosen'); });
-    cards[style].classList.add('chosen');
-    setStatus('투표를 저장하는 중...');
+  // 방명록 작성
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    // 스팸봇 방지용 숨김 필드(honeypot)가 채워졌으면 무시
+    if (form.website && form.website.value){ return; }
 
-    const { error } = await supabase.from('style_votes').insert({ style: style });
+    const name = nameEl.value.trim();
+    const message = msgEl.value.trim();
+    if (!name || !message){
+      setStatus('이름과 메시지를 모두 입력해 주세요.', true);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    setStatus('저장하는 중...');
+
+    const { error } = await supabase
+      .from('guestbook')
+      .insert({ name: name, message: message });
+
     if (error){
       console.error(error);
-      setStatus('투표 저장에 실패했어요. 다시 시도해 주세요.', true);
-      Object.values(cards).forEach(function(b){ b.disabled = false; });
+      setStatus('저장에 실패했어요. 잠시 후 다시 시도해 주세요.', true);
+      submitBtn.disabled = false;
       return;
     }
-    setStatus('투표해 주셔서 고마워요! 결과를 갱신했어요.');
-    await loadResults();
-    Object.values(cards).forEach(function(b){ b.disabled = false; });
-  }
 
-  document.querySelectorAll('.vote-card').forEach(function(btn){
-    btn.addEventListener('click', function(){ vote(btn.dataset.style); });
+    msgEl.value = '';
+    setStatus('방명록을 남겨 주셔서 고마워요!');
+    await loadEntries();
+    submitBtn.disabled = false;
   });
 
-  // 최초 로드 시 결과 표시
-  loadResults();
+  // 최초 로드 시 목록 표시
+  loadEntries();
 
-  // 다른 기기/사용자의 새 투표를 실시간 반영
+  // 다른 기기/사용자의 새 글을 실시간 반영
   supabase
-    .channel('style_votes_changes')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'style_votes' }, function(){
-      loadResults();
+    .channel('guestbook_changes')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, function(){
+      loadEntries();
     })
     .subscribe();
 </script>
