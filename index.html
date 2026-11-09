@@ -72,15 +72,6 @@ a{color:inherit}
   width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;
   filter:contrast(1.05) saturate(1.1);
 }
-.photo-badge{
-  position:absolute;right:-12px;bottom:22px;z-index:2;
-  font-family:"Bebas Neue",sans-serif;letter-spacing:.15em;font-size:19px;
-  padding:9px 17px;border-radius:999px;color:#111;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
-  box-shadow:0 10px 26px rgba(0,0,0,.5);
-  animation:floatBadge 4s ease-in-out infinite;
-}
-@keyframes floatBadge{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-10px) rotate(-4deg)}}
 .hero h1{
   font-family:"Black Han Sans","Noto Sans KR",sans-serif;font-weight:400;
   font-size:clamp(76px,19vw,196px);line-height:.92;letter-spacing:-.03em;
@@ -231,7 +222,7 @@ footer a{font-weight:700;color:var(--red-soft)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,.hero p.hi,.hero h1,.hero .tag,.hero nav,.hero .univ,.emblem,.emblem .spin,.orb,.fx.grain,.photo-badge,.photo-frame{animation:none!important;transition:none!important}
+  *,.hero h1,.hero .tag,.hero nav,.hero .univ,.emblem,.emblem .spin,.orb,.fx.grain,.photo-frame{animation:none!important;transition:none!important}
   .reveal{opacity:1!important;transform:none!important}
 }
 </style>
@@ -298,7 +289,6 @@ footer a{font-weight:700;color:var(--red-soft)}
 
    <div class="photo-frame">
      <img src="profile.png" alt="송민준 프로필 사진">
-     <div class="photo-badge">✌ PEACE</div>
    </div>
   </div>
 </header>
