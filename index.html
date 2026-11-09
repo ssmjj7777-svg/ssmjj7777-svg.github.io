@@ -22,11 +22,11 @@ body{
   overflow-x:hidden;
 }
 /* 빛 번짐 글로우 오브 (사진 속 야간 보케 느낌) */
-.orb{position:fixed;z-index:0;border-radius:50%;pointer-events:none}
-.orb.o1{width:360px;height:360px;background:var(--purple);filter:blur(130px);opacity:.42;top:-90px;left:-70px;animation:float1 17s ease-in-out infinite}
-.orb.o2{width:300px;height:300px;background:var(--red);filter:blur(130px);opacity:.34;bottom:-110px;right:-90px;animation:float2 19s ease-in-out infinite}
-.orb.o3{width:140px;height:140px;background:var(--amber);filter:blur(80px);opacity:.5;top:24%;right:14%;animation:float3 13s ease-in-out infinite}
-.orb.o4{width:90px;height:90px;background:var(--purple-soft);filter:blur(55px);opacity:.55;bottom:30%;left:10%;animation:float1 11s ease-in-out infinite}
+.orb{position:fixed;z-index:0;border-radius:50%;pointer-events:none;background:#ffffff}
+.orb.o1{width:340px;height:340px;filter:blur(150px);opacity:.1;top:-100px;left:-80px;animation:float1 17s ease-in-out infinite}
+.orb.o2{width:280px;height:280px;filter:blur(150px);opacity:.08;bottom:-120px;right:-90px;animation:float2 19s ease-in-out infinite}
+.orb.o3{width:120px;height:120px;filter:blur(90px);opacity:.1;top:24%;right:14%;animation:float3 13s ease-in-out infinite}
+.orb.o4{width:80px;height:80px;filter:blur(70px);opacity:.1;bottom:30%;left:10%;animation:float1 11s ease-in-out infinite}
 @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,50px)}}
 @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-40px)}}
 @keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,40px) scale(1.15)}}
@@ -57,8 +57,8 @@ a{color:inherit}
 /* Hero 사진 프레임 */
 .photo-frame{
   position:relative;aspect-ratio:3/4;border-radius:26px;overflow:hidden;
-  padding:3px;background:linear-gradient(150deg,var(--purple-soft),var(--purple) 40%,var(--red));
-  box-shadow:0 0 0 1px rgba(181,123,255,.3),0 30px 80px rgba(139,47,255,.5),0 10px 40px rgba(255,45,85,.3);
+  padding:1px;background:rgba(255,255,255,.14);
+  box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 40px rgba(255,255,255,.06);
   animation:popIn 1s .35s ease both;
 }
 /* 블랙 바탕 + 플래시 하이라이트 + 비네트 (사진 무드) */
@@ -82,11 +82,11 @@ a{color:inherit}
 .photo-frame .ph small{color:var(--muted);font-size:13px;max-width:16em;line-height:1.5}
 .photo-frame img:not([src=""]) + .ph{display:none}
 .photo-badge{
-  position:absolute;right:-14px;bottom:22px;z-index:2;
-  font-family:"Bebas Neue",sans-serif;letter-spacing:.15em;font-size:20px;
-  padding:10px 18px;border-radius:999px;color:#fff;
-  background:linear-gradient(120deg,var(--purple),var(--red));
-  box-shadow:0 12px 30px rgba(255,45,85,.45);
+  position:absolute;right:-12px;bottom:22px;z-index:2;
+  font-family:"Bebas Neue",sans-serif;letter-spacing:.15em;font-size:19px;
+  padding:9px 17px;border-radius:999px;color:#111;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
+  box-shadow:0 10px 26px rgba(0,0,0,.5);
   animation:floatBadge 4s ease-in-out infinite;
 }
 @keyframes floatBadge{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-10px) rotate(-4deg)}}
@@ -257,7 +257,6 @@ footer a{font-weight:700;color:var(--red-soft)}
 <header class="hero">
   <div class="wrap hero-grid">
    <div class="hero-text">
-    <p class="hi">Hello, I am</p>
     <div class="name-row">
       <h1>송민준</h1>
       <svg class="emblem" viewBox="0 0 200 200" role="img" aria-label="국민대학교 엠블럼" xmlns="http://www.w3.org/2000/svg">
@@ -405,6 +404,15 @@ footer a{font-weight:700;color:var(--red-soft)}
 
       <p id="gbCount" class="gb-count"></p>
       <ul id="gbList" class="gb-list"></ul>
+    </div>
+  </section>
+
+  <section id="shot" class="reveal">
+    <div class="wrap shot">
+      <figure>
+        <img src="profile.png" alt="메인 사진">
+        <figcaption><b>✌</b> PEACE &amp; VIBE</figcaption>
+      </figure>
     </div>
   </section>
 </main>
